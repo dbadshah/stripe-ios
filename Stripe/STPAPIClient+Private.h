@@ -11,9 +11,9 @@
 #import "STPAPIClient.h"
 #import "STPAPIRequest.h"
 
-NS_ASSUME_NONNULL_BEGIN
-
 @class STPEphemeralKey;
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface STPAPIClient()
 
@@ -35,24 +35,39 @@ NS_ASSUME_NONNULL_BEGIN
 @interface STPAPIClient (Customers)
 
 /**
- https://stripe.com/docs/api#retrieve_customer
+ Retrieve a customer
+
+ @see https://stripe.com/docs/api#retrieve_customer
  */
 + (void)retrieveCustomerUsingKey:(STPEphemeralKey *)ephemeralKey
                       completion:(STPCustomerCompletionBlock)completion;
 
 /**
- https://stripe.com/docs/api#create_card
+ Add a source to a customer
+
+ @see https://stripe.com/docs/api#create_card
  */
 + (void)addSource:(NSString *)sourceID
 toCustomerUsingKey:(STPEphemeralKey *)ephemeralKey
        completion:(STPSourceProtocolCompletionBlock)completion;
 
 /**
- https://stripe.com/docs/api#update_customer
+ Update a customer with parameters
+
+ @see https://stripe.com/docs/api#update_customer
  */
 + (void)updateCustomerWithParameters:(NSDictionary *)parameters
                             usingKey:(STPEphemeralKey *)ephemeralKey
                           completion:(STPCustomerCompletionBlock)completion;
+
+/**
+ Detach a source from a customer
+
+ @see https://stripe.com/docs/api#delete_card
+ */
++ (void)detachSource:(NSString *)sourceID
+fromCustomerUsingKey:(STPEphemeralKey *)ephemeralKey
+          completion:(STPSourceProtocolCompletionBlock)completion;
 
 @end
 
